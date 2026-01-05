@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI / Claude Code artifacts
+.claude/
+CLAUDE.md
+AGENTS.md
+.aider*
+.cursorrules
+.copilot/
+*.ai-context
+.codeium/
+.windsurf/
+.continue/
+.anthropic/
+*.claude
+.cursor/
