@@ -2,6 +2,8 @@
 
 Personal landing page for **Aleksandr Grek**, Senior Full-Stack Software Engineer based in Vienna, Austria.
 
+🌐 **Live:** [aleksandr-grek.netlify.app](https://aleksandr-grek.netlify.app)
+
 ---
 
 ## About
