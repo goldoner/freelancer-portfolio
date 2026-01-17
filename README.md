@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aleksandr Grek — Freelancer Portfolio
+
+Personal landing page for **Aleksandr Grek**, Senior Full-Stack Software Engineer based in Vienna, Austria.
+
+---
+
+## About
+
+A dark-themed, animated freelancer portfolio built with **Next.js 16**, **Framer Motion**, and **Tailwind CSS v4**. Features smooth scroll sections, interactive spotlight effects, a typewriter hero with profile photo, and cross-browser compatible rendering — all statically generated with no external runtime dependencies.
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animation | Framer Motion |
+| Icons | Lucide React + custom SVGs |
+| Font | Geist (via `next/font`) |
+
+## Sections
+
+- **Hero** — Profile photo, animated typewriter ("Senior Full Stack Engineer."), availability badge, CTA links
+- **About** — Story, background, USP cards
+- **Services** — 10 service offerings with interactive hover spotlight
+- **Stack** — Tech categorised by domain
+- **Experience** — Timeline: Porsche Informatik · GridData · Fiverr + Education & Certifications
+- **Rates** — "Let's talk" engagement card with platform links
+- **Contact** — Email, GitHub, LinkedIn, location
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build & Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+**Deploy to Vercel** (recommended — connect your GitHub repo at [vercel.com/new](https://vercel.com/new) for automatic deployments on push).
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/
+│   ├── globals.css       # Tailwind + spotlight keyframe + overflow fix
+│   ├── layout.tsx        # Metadata, SEO, fonts
+│   └── page.tsx          # Section composition
+├── components/
+│   ├── sections/
+│   │   ├── Navbar.tsx
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── Services.tsx
+│   │   ├── Stack.tsx
+│   │   ├── Experience.tsx
+│   │   ├── Rates.tsx
+│   │   └── Contact.tsx
+│   └── ui/
+│       ├── spotlight.tsx
+│       ├── typewriter-effect.tsx
+│       └── social-icons.tsx
+└── lib/
+    └── utils.ts
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Email: [goldoner@gmail.com](mailto:goldoner@gmail.com)
+- GitHub: [github.com/goldoner](https://github.com/goldoner)
+- LinkedIn: [linkedin.com/in/aleksandr-grek-79137b1a8](https://www.linkedin.com/in/aleksandr-grek-79137b1a8/)
+- Location: Vienna, Austria
