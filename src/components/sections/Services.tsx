@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MouseSpotlight } from "@/components/ui/spotlight";
+import { AnimatedBackground } from "@/components/ui/animated-background";
 
 const services = [
   {
@@ -62,17 +63,18 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="bg-black py-24 px-4">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <section id="services" className="relative bg-white dark:bg-black py-24 px-4 overflow-hidden">
+      <AnimatedBackground variant={2} />
+      <div className="relative z-10 max-w-6xl mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-400 uppercase">Services</span>
-          <h2 className="mt-2 text-4xl font-bold text-white">What I can build for you</h2>
-          <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">Services</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">What I can build for you</h2>
+          <p className="mt-4 text-gray-600 dark:text-zinc-400 max-w-2xl mx-auto">
             From architecture decisions to production deployments — I own the full lifecycle.
           </p>
         </motion.div>
@@ -85,10 +87,10 @@ export default function Services() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.06 }}
             >
-              <MouseSpotlight className="h-full rounded-xl border border-zinc-800 bg-zinc-900 p-6 hover:border-purple-500/40 transition-colors duration-300">
+              <MouseSpotlight className="h-full rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 p-6 hover:border-purple-500/40 transition-colors duration-300">
                 <div className="text-3xl mb-4">{service.icon}</div>
-                <h3 className="font-semibold text-white mb-2">{service.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{service.desc}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{service.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-zinc-400 leading-relaxed">{service.desc}</p>
               </MouseSpotlight>
             </motion.div>
           ))}

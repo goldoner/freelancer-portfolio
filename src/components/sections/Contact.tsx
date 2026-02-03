@@ -4,7 +4,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
-import { Spotlight } from "@/components/ui/spotlight";
+import { AnimatedBackground } from "@/components/ui/animated-background";
 
 const links = [
   {
@@ -38,9 +38,8 @@ export default function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="relative bg-black py-24 px-4 overflow-hidden">
-      <Spotlight className="top-0 left-1/2 -translate-x-1/2" fill="purple" />
-
+    <section id="contact" className="relative bg-white dark:bg-black py-24 px-4 overflow-hidden">
+      <AnimatedBackground variant={6} />
       <div className="relative z-10 max-w-3xl mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,9 +47,9 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-400 uppercase">Contact</span>
-          <h2 className="mt-2 text-4xl font-bold text-white">Let&apos;s build something together</h2>
-          <p className="mt-4 text-zinc-400 max-w-xl mx-auto">
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">Contact</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">Let&apos;s build something together</h2>
+          <p className="mt-4 text-gray-600 dark:text-zinc-400 max-w-xl mx-auto">
             Got a project in mind? Whether it&apos;s a quick architecture review or a long-term engagement,
             I&apos;d love to hear about it. Response within 24 hours.
           </p>
@@ -67,14 +66,14 @@ export default function Contact() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: i * 0.08 }}
               whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4 hover:border-purple-500/40 hover:bg-zinc-800 transition-all duration-200 group"
+              className="flex items-center gap-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 p-4 hover:border-purple-500/40 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all duration-200 group"
             >
-              <div className="text-zinc-400 group-hover:text-purple-400 transition-colors duration-200 shrink-0">
+              <div className="text-gray-500 dark:text-zinc-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200 shrink-0">
                 {link.icon}
               </div>
               <div className="min-w-0">
-                <p className="text-xs text-zinc-500">{link.label}</p>
-                <p className="text-sm font-medium text-white truncate">{link.value}</p>
+                <p className="text-xs text-gray-500 dark:text-zinc-500">{link.label}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{link.value}</p>
               </div>
             </motion.a>
           ))}
@@ -96,7 +95,7 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      <div className="mt-20 border-t border-zinc-900 pt-8 text-center text-sm text-zinc-600">
+      <div className="mt-20 border-t border-gray-200 dark:border-zinc-900 pt-8 text-center text-sm text-gray-400 dark:text-zinc-600">
         <p>© {new Date().getFullYear()} Aleksandr Grek e.U. · Vienna, Austria · All rights reserved.</p>
       </div>
     </section>
