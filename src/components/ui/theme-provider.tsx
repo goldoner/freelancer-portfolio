@@ -23,6 +23,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  useEffect(() => {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#000000" : "#ffffff");
+  }, [theme]);
+
   const toggle = () => {
     const next = theme === "light" ? "dark" : "light";
     setTheme(next);

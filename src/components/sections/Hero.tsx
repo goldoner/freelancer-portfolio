@@ -1,8 +1,18 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import dynamic from "next/dynamic";
 import { AnimatedBackground } from "@/components/ui/animated-background";
+
+const TypewriterEffectSmooth = dynamic(
+  () => import("@/components/ui/typewriter-effect").then((m) => m.TypewriterEffectSmooth),
+  {
+    ssr: false,
+    loading: () => (
+      <span className="text-gray-900 dark:text-white font-bold">Full Stack Engineer.</span>
+    ),
+  }
+);
 import { Mail, ArrowDown } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
 
