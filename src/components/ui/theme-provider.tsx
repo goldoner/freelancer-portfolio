@@ -12,6 +12,10 @@ export function useTheme() {
   return useContext(ThemeContext);
 }
 
+function setThemeColor(t: Theme) {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t === "dark" ? "#000000" : "#ffffff");
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
@@ -20,19 +24,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (stored === "dark") {
       setTheme("dark");
       document.documentElement.classList.add("dark");
+      setThemeColor("dark");
     }
   }, []);
-
-  useEffect(() => {
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#000000" : "#ffffff");
-  }, [theme]);
 
   const toggle = () => {
     const next = theme === "light" ? "dark" : "light";
     setTheme(next);
     localStorage.setItem("theme", next);
     document.documentElement.classList.toggle("dark", next === "dark");
+    setThemeColor(next);
   };
 
   return (
