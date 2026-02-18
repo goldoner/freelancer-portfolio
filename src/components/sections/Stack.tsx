@@ -2,37 +2,22 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/components/ui/language-provider";
 
-const categories = [
-  {
-    label: "Core Backend",
-    items: ["Java", "Spring Boot", "Micronaut", "Python", "REST APIs", "GraphQL"],
-  },
-  {
-    label: "Frontend",
-    items: ["TypeScript", "Angular", "Next.js", "React", "iOS (Swift)"],
-  },
-  {
-    label: "Messaging & Search",
-    items: ["Apache Kafka", "RabbitMQ", "Elasticsearch", "Redis"],
-  },
-  {
-    label: "Databases",
-    items: ["PostgreSQL", "MySQL", "Redis", "Liquibase"],
-  },
-  {
-    label: "DevOps & Cloud",
-    items: ["Docker", "Kubernetes", "OpenShift", "AWS", "GitLab CI/CD", "Terraform"],
-  },
-  {
-    label: "Security & Architecture",
-    items: ["Spring Security", "OAuth2 / JWT", "Domain-Driven Design", "Microservices", "Event-Driven"],
-  },
+const categoryItems = [
+  ["Java", "Spring Boot", "Micronaut", "Python", "REST APIs", "GraphQL"],
+  ["TypeScript", "Angular", "Next.js", "React", "iOS (Swift)"],
+  ["Apache Kafka", "RabbitMQ", "Elasticsearch", "Redis"],
+  ["PostgreSQL", "MySQL", "Redis", "Liquibase"],
+  ["Docker", "Kubernetes", "OpenShift", "AWS", "GitLab CI/CD", "Terraform"],
+  ["Spring Security", "OAuth2 / JWT", "Domain-Driven Design", "Microservices", "Event-Driven"],
 ];
 
 export default function Stack() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+  const s = t.stack;
 
   return (
     <section id="stack" className="bg-gray-50 dark:bg-zinc-950 py-24 px-4">
@@ -43,12 +28,12 @@ export default function Stack() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">Tech Stack</span>
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">Tools of the trade</h2>
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">{s.label}</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">{s.title}</h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat, i) => (
+          {s.categories.map((cat, i) => (
             <motion.div
               key={cat.label}
               initial={{ opacity: 0, y: 20 }}
@@ -60,7 +45,7 @@ export default function Stack() {
                 {cat.label}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {cat.items.map((item) => (
+                {categoryItems[i].map((item) => (
                   <motion.span
                     key={item}
                     whileHover={{ scale: 1.05 }}

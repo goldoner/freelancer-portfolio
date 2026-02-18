@@ -5,37 +5,40 @@ import { useRef } from "react";
 import { Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
 import { AnimatedBackground } from "@/components/ui/animated-background";
-
-const links = [
-  {
-    icon: <Mail size={20} />,
-    label: "Email",
-    value: "goldoner@gmail.com",
-    href: "mailto:goldoner@gmail.com",
-  },
-  {
-    icon: <GithubIcon size={20} />,
-    label: "GitHub",
-    value: "github.com/goldoner",
-    href: "https://github.com/goldoner",
-  },
-  {
-    icon: <LinkedinIcon size={20} />,
-    label: "LinkedIn",
-    value: "linkedin.com/in/aleksandr-grek",
-    href: "https://www.linkedin.com/in/aleksandr-grek-79137b1a8/",
-  },
-  {
-    icon: <MapPin size={20} />,
-    label: "Location",
-    value: "1100 Vienna, Austria",
-    href: "https://maps.google.com/?q=Vienna+Austria",
-  },
-];
+import { useLanguage } from "@/components/ui/language-provider";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+  const c = t.contact;
+
+  const links = [
+    {
+      icon: <Mail size={20} />,
+      label: c.emailLabel,
+      value: "goldoner@gmail.com",
+      href: "mailto:goldoner@gmail.com",
+    },
+    {
+      icon: <GithubIcon size={20} />,
+      label: "GitHub",
+      value: "github.com/goldoner",
+      href: "https://github.com/goldoner",
+    },
+    {
+      icon: <LinkedinIcon size={20} />,
+      label: "LinkedIn",
+      value: "linkedin.com/in/aleksandr-grek",
+      href: "https://www.linkedin.com/in/aleksandr-grek-79137b1a8/",
+    },
+    {
+      icon: <MapPin size={20} />,
+      label: c.locationLabel,
+      value: "1100 Vienna, Austria",
+      href: "https://maps.google.com/?q=Vienna+Austria",
+    },
+  ];
 
   return (
     <section id="contact" className="relative bg-white dark:bg-black py-24 px-4 overflow-hidden">
@@ -47,12 +50,9 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">Contact</span>
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">Let&apos;s build something together</h2>
-          <p className="mt-4 text-gray-600 dark:text-zinc-400 max-w-xl mx-auto">
-            Got a project in mind? Whether it&apos;s a quick architecture review or a long-term engagement,
-            I&apos;d love to hear about it. Response within 24 hours.
-          </p>
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">{c.label}</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">{c.title}</h2>
+          <p className="mt-4 text-gray-600 dark:text-zinc-400 max-w-xl mx-auto">{c.subtitle}</p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 gap-4 mb-10">
@@ -90,13 +90,13 @@ export default function Contact() {
             className="inline-flex items-center gap-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold px-8 py-4 text-lg transition-all duration-200 hover:shadow-xl hover:shadow-purple-500/25"
           >
             <Mail size={20} />
-            Send me a message
+            {c.send}
           </a>
         </motion.div>
       </div>
 
       <div className="mt-20 border-t border-gray-200 dark:border-zinc-900 pt-8 text-center text-sm text-gray-400 dark:text-zinc-600">
-        <p>© {new Date().getFullYear()} Aleksandr Grek e.U. · Vienna, Austria · All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {c.footer}</p>
       </div>
     </section>
   );

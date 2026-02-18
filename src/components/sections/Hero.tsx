@@ -15,6 +15,7 @@ const TypewriterEffectSmooth = dynamic(
 );
 import { Mail, ArrowDown } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
+import { useLanguage } from "@/components/ui/language-provider";
 
 const roles = [
   { text: "Full" },
@@ -23,6 +24,8 @@ const roles = [
 ];
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-white dark:bg-black overflow-hidden">
 
@@ -58,7 +61,7 @@ export default function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500" />
           </span>
-          Available for freelance projects · Vienna, Austria
+          {t.hero.badge}
         </motion.div>
 
         <motion.h1
@@ -84,9 +87,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-gray-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed mb-10"
         >
-          6+ years building scalable backend systems, microservices, and full-stack applications. Former{" "}
-          <span className="text-gray-900 dark:text-white font-medium">Porsche Informatik</span> engineer,
-          now helping DACH and international clients ship faster with{" "}
+          {t.hero.descPart1}
+          <span className="text-gray-900 dark:text-white font-medium">Porsche Informatik</span>
+          {t.hero.descPart2}
           <span className="text-purple-600 dark:text-purple-400 whitespace-nowrap">Java · Spring Boot · TypeScript</span>.
         </motion.p>
 
@@ -101,7 +104,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-3 transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/25"
           >
             <Mail size={18} />
-            Hire Me
+            {t.hero.hire}
           </a>
           <a
             href="https://github.com/goldoner"
@@ -129,7 +132,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-20 flex flex-col items-center gap-2 text-gray-400 dark:text-zinc-600"
         >
-          <span className="text-sm">Scroll to explore</span>
+          <span className="text-sm">{t.hero.scroll}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}

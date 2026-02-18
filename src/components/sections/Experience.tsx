@@ -3,21 +3,15 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { AnimatedBackground } from "@/components/ui/animated-background";
+import { useLanguage } from "@/components/ui/language-provider";
 
-const jobs = [
+const jobsMeta = [
   {
     role: "Software Engineer",
     company: "Porsche Informatik",
     location: "Vienna, Austria",
     period: "Jan 2023 – 2026",
-    type: "Full-time",
-    bullets: [
-      "Designed and delivered high-performance microservices for automotive business-critical systems",
-      "Led legacy system migrations using strangler fig patterns with zero production downtime",
-      "Deployed and operated services on Kubernetes and OpenShift in enterprise-grade environments",
-      "Automated CI/CD pipelines with GitLab — reducing release cycle time significantly",
-      "Stack: Java, Spring Boot, PostgreSQL, Kafka, Kubernetes, OpenShift, GitLab CI/CD",
-    ],
+    type: "fullTime" as const,
     accent: "text-yellow-600 dark:text-yellow-400",
     border: "border-yellow-500/30",
     dotBorder: "border-yellow-500/30",
@@ -27,13 +21,7 @@ const jobs = [
     company: "GridData",
     location: "Traunstein, Germany (Remote)",
     period: "Apr 2021 – Dec 2023",
-    type: "Full-time",
-    bullets: [
-      "Built CI/CD pipeline infrastructure from the ground up, enabling reliable automated releases",
-      "Developed data migration tooling for complex dataset transformations",
-      "Implemented algorithms for sensor data processing on Raspberry Pi edge hardware",
-      "Stack: Java, Python, Docker, GitLab CI/CD, Raspberry Pi",
-    ],
+    type: "fullTime" as const,
     accent: "text-blue-600 dark:text-blue-400",
     border: "border-blue-500/30",
     dotBorder: "border-blue-500/30",
@@ -43,12 +31,7 @@ const jobs = [
     company: "Fiverr",
     location: "Remote",
     period: "Nov 2019 – Mar 2021",
-    type: "Freelance",
-    bullets: [
-      "Delivered messenger bots and automation tools for international clients",
-      "Applied OOP design patterns to build maintainable, reusable solutions",
-      "Contributed to open-source projects alongside client work",
-    ],
+    type: "freelance" as const,
     accent: "text-green-600 dark:text-green-400",
     border: "border-green-500/30",
     dotBorder: "border-green-500/30",
@@ -67,6 +50,8 @@ const certs = [
 export default function Experience() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+  const e = t.experience;
 
   return (
     <section id="experience" className="relative bg-white dark:bg-black py-24 px-4 overflow-hidden">
@@ -78,16 +63,15 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">Experience</span>
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">Where I&apos;ve worked</h2>
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">{e.label}</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">{e.title}</h2>
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-200 dark:bg-zinc-800 hidden md:block" />
 
           <div className="space-y-10">
-            {jobs.map((job, i) => (
+            {jobsMeta.map((job, i) => (
               <motion.div
                 key={job.company}
                 initial={{ opacity: 0, x: -20 }}
@@ -95,7 +79,6 @@ export default function Experience() {
                 transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="relative md:pl-12"
               >
-                {/* Timeline dot */}
                 <div className={`absolute left-2.5 top-5 h-3 w-3 rounded-full border-2 ${job.dotBorder} bg-white dark:bg-black hidden md:block`} />
 
                 <div className={`rounded-xl border ${job.border} bg-gray-50 dark:bg-zinc-900 p-6 hover:bg-gray-100 dark:hover:bg-zinc-800/50 transition-colors duration-300`}>
@@ -109,12 +92,12 @@ export default function Experience() {
                       <span className="text-sm text-gray-600 dark:text-zinc-400">{job.period}</span>
                       <br />
                       <span className="text-xs rounded-full border border-gray-300 dark:border-zinc-700 px-2 py-0.5 text-gray-500 dark:text-zinc-500">
-                        {job.type}
+                        {job.type === "fullTime" ? e.fullTime : e.freelance}
                       </span>
                     </div>
                   </div>
                   <ul className="space-y-2">
-                    {job.bullets.map((b) => (
+                    {e.jobs[i].bullets.map((b) => (
                       <li key={b} className="flex items-start gap-2 text-sm text-gray-600 dark:text-zinc-400">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-400 dark:bg-zinc-600" />
                         {b}
@@ -127,19 +110,18 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* Education */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16"
         >
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Education & Certifications</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">{e.education}</h3>
           <div className="grid sm:grid-cols-2 gap-4">
             <div className="rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 p-5">
-              <p className="text-xs text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-1">University</p>
-              <p className="font-semibold text-gray-900 dark:text-white">Bachelor of Computer Science</p>
-              <p className="text-sm text-gray-600 dark:text-zinc-400">University of Salzburg · 2019–2023</p>
+              <p className="text-xs text-purple-600 dark:text-purple-400 uppercase tracking-widest mb-1">{e.university}</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{e.degree}</p>
+              <p className="text-sm text-gray-600 dark:text-zinc-400">{e.school}</p>
             </div>
             {certs.map((c) => (
               <div key={c.name} className="rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 p-5">

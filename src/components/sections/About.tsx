@@ -3,52 +3,36 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MapPin, Briefcase, GraduationCap, Languages } from "lucide-react";
-
-const highlights = [
-  {
-    icon: <Briefcase size={20} className="text-purple-600 dark:text-purple-400" />,
-    label: "Experience",
-    value: "6+ years",
-  },
-  {
-    icon: <MapPin size={20} className="text-purple-600 dark:text-purple-400" />,
-    label: "Location",
-    value: "Vienna, Austria",
-  },
-  {
-    icon: <GraduationCap size={20} className="text-purple-600 dark:text-purple-400" />,
-    label: "Degree",
-    value: "BSc Computer Science",
-  },
-  {
-    icon: <Languages size={20} className="text-purple-600 dark:text-purple-400" />,
-    label: "Languages",
-    value: "DE · EN · RU",
-  },
-];
-
-const usps = [
-  {
-    title: "Enterprise-grade credibility",
-    desc: "Shaped by years at Porsche Informatik — a benchmark for high-stakes, production-grade software in the automotive sector.",
-  },
-  {
-    title: "Deep backend mastery",
-    desc: "Java & Spring Boot specialist with hands-on expertise in Kubernetes, OpenShift, Kafka, and distributed systems at scale.",
-  },
-  {
-    title: "AI-accelerated delivery",
-    desc: "Actively integrates AI tooling into the development workflow — meaning faster iteration, fewer bugs, and sharper results.",
-  },
-  {
-    title: "Architectural thinking",
-    desc: "Domain-Driven Design and microservices aren't buzzwords — they're the lens through which every system is designed.",
-  },
-];
+import { useLanguage } from "@/components/ui/language-provider";
 
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+  const a = t.about;
+
+  const highlights = [
+    {
+      icon: <Briefcase size={20} className="text-purple-600 dark:text-purple-400" />,
+      label: a.highlightExperience,
+      value: "6+ years",
+    },
+    {
+      icon: <MapPin size={20} className="text-purple-600 dark:text-purple-400" />,
+      label: a.highlightLocation,
+      value: "Vienna, Austria",
+    },
+    {
+      icon: <GraduationCap size={20} className="text-purple-600 dark:text-purple-400" />,
+      label: a.highlightDegree,
+      value: "BSc Computer Science",
+    },
+    {
+      icon: <Languages size={20} className="text-purple-600 dark:text-purple-400" />,
+      label: a.highlightLanguages,
+      value: "DE · EN · RU",
+    },
+  ];
 
   return (
     <section id="about" className="bg-gray-50 dark:bg-zinc-950 py-24 px-4">
@@ -59,8 +43,8 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">About</span>
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">The story behind the engineer</h2>
+          <span className="text-sm font-semibold tracking-widest text-purple-600 dark:text-purple-400 uppercase">{a.label}</span>
+          <h2 className="mt-2 text-4xl font-bold text-gray-900 dark:text-white">{a.title}</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -71,29 +55,22 @@ export default function About() {
             className="space-y-5 text-gray-600 dark:text-zinc-400 leading-relaxed"
           >
             <p>
-              I started my software journey at the{" "}
-              <span className="text-gray-900 dark:text-white">University of Salzburg</span>, where I studied
-              Computer Science and quickly gravitated toward backend systems — the invisible
-              machinery that makes everything else work.
+              {a.p1a}
+              <span className="text-gray-900 dark:text-white">University of Salzburg</span>
+              {a.p1b}
             </p>
             <p>
-              My career took off on Fiverr, building messenger bots and contributing to open
-              source. From there I joined <span className="text-gray-900 dark:text-white">GridData</span> in
-              Germany, designing CI/CD pipelines and data migration tools before landing at{" "}
-              <span className="text-gray-900 dark:text-white">Porsche Informatik</span> in Vienna — one of
-              Austria's most demanding software environments.
+              {a.p2a}
+              <span className="text-gray-900 dark:text-white">GridData</span>
+              {a.p2b}
+              <span className="text-gray-900 dark:text-white">Porsche Informatik</span>
+              {a.p2c}
             </p>
+            <p>{a.p3}</p>
             <p>
-              At Porsche I designed high-performance microservices, drove legacy migrations,
-              and deployed to production on Kubernetes and OpenShift. That experience gave me
-              a rare combination: the rigor of enterprise engineering and the speed of a
-              modern DevOps mindset.
-            </p>
-            <p>
-              Now I freelance independently, registered as{" "}
-              <span className="text-gray-900 dark:text-white">Aleksandr Grek e.U.</span> in Austria. I work with
-              DACH companies and international clients on Upwork, helping them build systems
-              that scale — and delivering them faster by leveraging AI tools in my workflow.
+              {a.p4a}
+              <span className="text-gray-900 dark:text-white">Aleksandr Grek e.U.</span>
+              {a.p4b}
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
@@ -118,8 +95,8 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-4"
           >
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">What sets me apart</h3>
-            {usps.map((usp, i) => (
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">{a.setsApart}</h3>
+            {a.usps.map((usp, i) => (
               <motion.div
                 key={usp.title}
                 initial={{ opacity: 0, y: 10 }}
