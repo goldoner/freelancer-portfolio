@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, MapPin } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
+import { GithubIcon, LinkedinIcon, TelegramIcon } from "@/components/ui/social-icons";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { useLanguage } from "@/components/ui/language-provider";
 
@@ -31,6 +31,12 @@ export default function Contact() {
       label: "LinkedIn",
       value: "linkedin.com/in/aleksandr-grek",
       href: "https://www.linkedin.com/in/aleksandr-grek-79137b1a8/",
+    },
+    {
+      icon: <TelegramIcon size={20} />,
+      label: "Telegram",
+      value: "t.me/goldoner",
+      href: "https://t.me/goldoner",
     },
     {
       icon: <MapPin size={20} />,

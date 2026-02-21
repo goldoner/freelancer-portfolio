@@ -14,7 +14,7 @@ const TypewriterEffectSmooth = dynamic(
   }
 );
 import { Mail, ArrowDown } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/social-icons";
+import { GithubIcon, LinkedinIcon, TelegramIcon } from "@/components/ui/social-icons";
 import { useLanguage } from "@/components/ui/language-provider";
 
 const roles = [
@@ -123,6 +123,15 @@ export default function Hero() {
           >
             <LinkedinIcon size={18} />
             LinkedIn
+          </a>
+          <a
+            href="https://t.me/goldoner"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-gray-300 hover:border-gray-400 bg-gray-100 hover:bg-gray-200 dark:border-zinc-700 dark:hover:border-zinc-500 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-gray-900 dark:text-white font-semibold px-6 py-3 transition-all duration-200"
+          >
+            <TelegramIcon size={18} />
+            Telegram
           </a>
         </motion.div>
 
